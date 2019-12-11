@@ -14,18 +14,18 @@ from keras.preprocessing.image import ImageDataGenerator
 
 model = load_model('model.h5')
 
-fuck_dir = '/Volumes/ADATA HD330/hw2/02468'
-fuck_dir_list = (os.listdir(fuck_dir))
+test_dir = '/Volumes/ADATA HD330/hw2/02468'
+test_dir_list = (os.listdir(test_dir))
 fW = open('/Users/zhoufei/desktop/answer.txt', 'w')
 
-fuck_dir_list.sort()
+test_dir_list.sort()
 
-for num in range(len(fuck_dir_list)):
-    img_path = os.path.join(fuck_dir, fuck_dir_list[num])
+for num in range(len(test_dir_list)):
+    img_path = os.path.join(test_dir, test_dir_list[num])
     img = image.load_img(img_path, target_size=(28, 28))
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
     img = img/255.
     predictions = model.predict_classes(img) * 2
     # print(predictions)
-    fW.write(fuck_dir_list[num][:-4] + ' ' + str(predictions[0]) + '\n')
+    fW.write(test_dir_list[num][:-4] + ' ' + str(predictions[0]) + '\n')
